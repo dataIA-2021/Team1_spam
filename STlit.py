@@ -213,9 +213,9 @@ if st.button('go'):
     with st.spinner('Wait for it...'):
         time.sleep(5)
         st.success('Done!')
-        #st.write(data_input)
+        st.write(data_input)
         st.write("It's ", y_pred_imput)        
-        #st.write(y_proba)
+        st.write(y_proba)
         my_labels = 'ham','spam'
         plt.pie(y,labels=my_labels,autopct='%1.1f%%',colors=['green','red'],radius=1)
         plt.title('Probability')
@@ -226,7 +226,7 @@ else:
 
 
 #SHOW THE ORIGINAL DATAFRAME
-st.write(data)
+#st.write(data)
 #st.write(data_input)
 #st.write(params)
 # prediction de notre modele

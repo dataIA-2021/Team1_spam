@@ -59,25 +59,30 @@ def make_dico(txt):
 
 dico = make_dico(data)    
 
-def count_words(txt):
-    
+def count_words(txt):    
     count = 0
     words = dico
-    for i in range (0, len (txt)):
-        txt.lower()
-        words = dico
+    txt = txt.lower()
+    txt = re.split('[!?123456*-_+=;:7890/.,$% ]',txt)
+    for i in range (0, len (txt)):      
+        
         #Checks whether given character is a punctuation mark  
         if txt[i] in (words) :  
             count = count + 1;  
             #print(count)
     return count
        
-def len_number(txt):
-    number_list1 = re.findall(r"\D(\d{5})\D", txt)
+def len_number10(txt):
+    #number_list1 = re.findall(r"\D(\d{5})\D", txt)
     number_list2 =  re.findall("(?<!\d)\d{11}(?!\d)", txt)
     number_list3 =  re.findall("(?<!\d)\d{10}(?!\d)", txt)
-    return len(number_list1 + number_list2 + number_list3) 
-        
+    return len(number_list2 + number_list3) 
+
+def len_number5(txt):
+    number_list1 = re.findall("(?<!\d)\d{5}(?!\d)", txt)
+    #number_list2 =  re.findall("(?<!\d)\d{11}(?!\d)", txt)
+    #number_list3 =  re.findall("(?<!\d)\d{10}(?!\d)", txt)
+    return len(number_list1)        
         
 def count_special_char(str):
     count = 0
@@ -102,7 +107,8 @@ def get_features(data):
     data["special_char"]=data.sms.apply(count_special_char)    
     data["spam_word"]=data.sms.apply(count_words)
     data["amount_url"]=data.sms.apply(count_url)     
-    data['phone_number'] = data.sms.apply(len_number)      
+    data['phone_number10'] = data.sms.apply(len_number10)
+    data['phone_number5'] = data.sms.apply(len_number5)    
         
     return data
 
